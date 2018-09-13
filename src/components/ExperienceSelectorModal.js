@@ -48,7 +48,6 @@ class ExperienceSelectorModal extends Component {
           </p>
           <Alert color="warning">Training models will take few minutes.</Alert>
           <ExperiencesList
-            selectedExperiences={this.props.selectedExperiences}
             experiences={this.props.experiences}
             updateSelectedExperiences={this.updateSelectedExperiences}
           />

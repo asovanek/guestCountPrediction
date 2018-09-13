@@ -18,6 +18,7 @@ class ExperiencesList extends Component {
     var experience = experiences.filter(experience => {
       return experience.id === event.currentTarget.getAttribute("experience");
     });
+
     experiences[experiences.indexOf(experience[0])].isEnabled =
       event.target.checked;
     this.setState({ experiences: experiences });
@@ -32,7 +33,7 @@ class ExperiencesList extends Component {
       var index = experiences.indexOf(experience[0]);
       experiences[index].indoor = false;
       this.setState({ experiences: experiences });
-      // this.props.updateSelectedExperiences(experiences);
+      this.props.updateSelectedExperiences(experiences);
     }
   };
 
@@ -41,11 +42,12 @@ class ExperiencesList extends Component {
     var experience = experiences.filter(experience => {
       return experience.id === event.currentTarget.getAttribute("experience");
     });
+
     if (experience.length > 0) {
       var index = experiences.indexOf(experience[0]);
-      experiences[index].indoor = true;
+      experiences[index].indoor = event.target.checked;
       this.setState({ experiences: experiences });
-      // this.props.updateSelectedExperiences(selectedExperiences);
+      this.props.updateSelectedExperiences(experiences);
     }
   };
 
@@ -57,8 +59,10 @@ class ExperiencesList extends Component {
         checked = false;
       }
       var indoor = false;
-      if (checked) {
+      if (this.props.experiences[i].indoor != undefined) {
         indoor = this.props.experiences[i].indoor;
+      } else {
+        indoor = false;
       }
       experiences.push(
         <tr>

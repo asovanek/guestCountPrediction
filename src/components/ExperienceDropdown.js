@@ -97,12 +97,7 @@ class ExperienceDropdown extends Component {
     var self = this;
 
     _.each(selectedExperiences, function(experience) {
-      var originalExperience = _.where(self.props.experiences, {
-        id: experience.id
-      });
-      // if (originalExperience.isEnabled) {
-      //   self.updateSelectedExperience(experience);
-      // }
+      self.updateSelectedExperience(experience);
     });
     this.setState({ selectedExperiences: selectedExperiences });
   };
@@ -125,6 +120,7 @@ class ExperienceDropdown extends Component {
             $isEnabled: Boolean
           ) {
             updateExperience(
+              _id: $experienceId
               input: {
                 sellerId: $sellerId
                 experienceId: $experienceId
@@ -142,8 +138,8 @@ class ExperienceDropdown extends Component {
         `
       })
       .then(response => {
-        var experienceData = response.data.createExperience;
-        console.log(response);
+        var experienceData = response.data.updateExperience;
+        console.log(experienceData);
       })
       .catch(error => console.error(error));
   };
